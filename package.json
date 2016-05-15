@@ -1,8 +1,15 @@
 {
-  "name": "click-funnels",
+  "name": "angular-webpack-seed",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "A seed project for Angular 1.x with Webpack",
+  "main": "public/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yjimk/angular-webpack-seed",
+  },
+  "bugs": {
+    "url": "https://github.com/yjimk/angular-webpack-seed/issues",
+  },
   "dependencies": {},
   "devDependencies": {
     "angular-mocks": "^1.5.5",
@@ -41,8 +48,16 @@
   },
   "scripts": {
     "start": "node_modules/.bin/webpack-dev-server --content-base public ",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "NODE_ENV='test' karma start"
   },
-  "author": "",
-  "license": "ISC"
+  "keywords": [
+    "Angular",
+    "Webpack",
+    "Karma",
+    "Jasmine",
+    "Seed"
+  ],
+  "author": "Jimmy Cann",
+  "analyze": true,
+  "license": "MIT"
 }
