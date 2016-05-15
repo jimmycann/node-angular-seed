@@ -5,10 +5,10 @@
   "main": "public/index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/yjimk/angular-webpack-seed",
+    "url": "https://github.com/yjimk/angular-webpack-seed"
   },
   "bugs": {
-    "url": "https://github.com/yjimk/angular-webpack-seed/issues",
+    "url": "https://github.com/yjimk/angular-webpack-seed/issues"
   },
   "dependencies": {},
   "devDependencies": {
