@@ -1,12 +1,13 @@
 var path = require('path');
 var webpack = require('webpack');
 var ngAnnotatePlugin = require('ng-annotate-webpack-plugin');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 var productionConfig = {
     entry: path.resolve(__dirname, './public/js/index.js'),
     output: {
         path: path.resolve(__dirname, './public/dist'),
-        filename: 'bundle.js'
+        filename: 'bundle.[hash].js'
     },
     plugins: [
         new ngAnnotatePlugin({
@@ -14,6 +15,7 @@ var productionConfig = {
             // other ng-annotate options here
         }),
         new webpack.optimize.DedupePlugin(),
+        new ExtractTextPlugin('style.[hash].css'),
         new webpack.optimize.UglifyJsPlugin({
             compress: {
                 warnings: false
@@ -22,9 +24,9 @@ var productionConfig = {
     ],
     module: {
         loaders: [
-
             {test: /\.js$/, loader:'babel-loader', exclude:'./~/node_modules'},
-            {test: /\.html$/, loader:'raw', exclude:'./~/node_modules'}
+            {test: /\.html$/, loader:'raw', exclude:'./~/node_modules'},
+            {test: /\.css$/, loader: ExtractTextPlugin.extract('style', 'css')}
         ]
     },
     resolveLoader: {
@@ -41,13 +43,14 @@ var config = {
     plugins: [
         new webpack.DefinePlugin({
             ON_TEST: process.env.NODE_ENV==="test"
-        })
+        }),
+        new ExtractTextPlugin('style.css')
     ],
     module: {
         loaders: [
-
-            {test: /\.js$/, loader:'babel-loader', exclude:'./~/node_modules'},
-            {test: /\.html$/, loader:'raw', exclude:'./~/node_modules'}
+            {test: /\.js$/, loader:'babel-loader', exclude: /node_modules/},
+            {test: /\.html$/, loader:'raw', exclude: /node_modules/},
+            {test: /\.css$/, loader: ExtractTextPlugin.extract('style', 'css')}
         ]
     },
     resolveLoader: {
@@ -55,11 +58,13 @@ var config = {
     }
 };
 
-if (process.env.NODE_ENV==="test")
-{
-    module.exports = config;
-}
-else
-{
-    module.exports = productionConfig;
-}
+module.exports = config;
+
+// if (process.env.NODE_ENV==="test")
+// {
+//     module.exports = config;
+// }
+// else
+// {
+//     module.exports = productionConfig;
+// }

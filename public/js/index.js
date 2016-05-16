@@ -1,3 +1,5 @@
+import '../css/main.min.css';
+
 import angular from 'angular';
 import uiRouter from 'angular-ui-router';
 import angularSanitize from 'angular-sanitize';
