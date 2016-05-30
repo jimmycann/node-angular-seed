@@ -23,6 +23,10 @@ For development tools and building:
 6. Run `npm test` to run Karma tests and watch for changes.
 7. Run `gulp build:watch` to process our stylesheets. Webpack also sees there changes and modifies the bundle.
 
+## e2e testing with Protractor
+
+From the project root run `protractor ./e2e/protractor.conf.js`
+
 ## Structure
 
 - `/public/components` contains a sub-directory for each component, holding source JS, styles and views.
