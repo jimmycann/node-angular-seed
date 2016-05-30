@@ -10,11 +10,15 @@ Another MEAN seed app with Webpack
 - SASS
 - Karma (Jasmine/Chai)
 
+## Dependencies
+
+1. Install the latest [Node.js and NPM](https://nodejs.org). This config is built with Node V6.2.0.
+2. Webpack `npm install webpack -g` and ensure it is available on your PATH
+
 ## Setup
 
 For development tools and building:
 
-1. Install the latest [Node.js and NPM](https://nodejs.org). This config is built with Node V6.2.0.
 2. Run `npm install` within the project root directory in Terminal.
 3. Change directory `cd ./public` and run `npm install ` again for the client side dependencies.
 4. Back to project root `cd ../`
@@ -26,6 +30,16 @@ For development tools and building:
 ## e2e testing with Protractor
 
 From the project root run `protractor ./e2e/protractor.conf.js`
+
+In order to run Protractor tests you'll need to have the `protractor` command available on your PATH. 
+Install with the entry `npm install protractor -g` if you haven't already.
+
+You'll also need Java in order to be able to run the tests.
+
+For Mac users there is a know issue with Protractor and Java. Currently the recommendation is to install Java via [Brew](http://brew.sh/).
+
+`brew update`
+`brew cask install java`
 
 ## Structure
 
