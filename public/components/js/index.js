@@ -1,4 +1,4 @@
-import '../css/main.min.css';
+import '../style/css/main.css';
 
 import angular from 'angular';
 import uiRouter from 'angular-ui-router';

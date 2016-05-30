@@ -5,10 +5,10 @@ export default ngModule => {
 
         $stateProvider.state('base', {
             url: '/',
-            templateUrl: 'views/main.html',
+            templateUrl: 'components/view/main.html',
             controller: 'mainController'
         });
         $locationProvider.html5Mode(true);
-
+        
     });
 }

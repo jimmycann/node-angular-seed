@@ -4,7 +4,8 @@ var ngAnnotatePlugin = require('ng-annotate-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 var productionConfig = {
-    entry: path.resolve(__dirname, './public/js/index.js'),
+    entry: path.resolve(__dirname, './public/components/js/index.js'),
+    devtool: 'source-map',
     output: {
         path: path.resolve(__dirname, './public/dist'),
         filename: 'bundle.[hash].js'
@@ -35,7 +36,8 @@ var productionConfig = {
 };
 
 var config = {
-    entry: path.resolve(__dirname, './public/js/index.js'),
+    entry: path.resolve(__dirname, './public/components/js/index.js'),
+    devtool: 'source-map',
     output: {
         path: path.resolve(__dirname, './public/dist'),
         filename: 'bundle.js'
@@ -57,14 +59,11 @@ var config = {
         root: path.join(__dirname, 'public/node_modules')
     }
 };
+var exports;
+if (process.env.NODE_ENV==="test" || process.env.NODE_ENV==="dev") {
+    exports = config;
+} else {
+    exports = productionConfig;
+}
 
-module.exports = config;
-
-// if (process.env.NODE_ENV==="test")
-// {
-//     module.exports = config;
-// }
-// else
-// {
-//     module.exports = productionConfig;
-// }
+module.exports = exports;
