@@ -1,17 +1,16 @@
 describe("mainController test", function () {
 
-    beforeEach(window.module("app"));
+    beforeEach(window.module("app.main"));
 
-    var mainController, scope;
+    var main, scope;
     beforeEach(inject(function($controller,$rootScope) {
         scope=$rootScope.$new();
-        mainController = $controller('mainController', {
-            $scope: scope
-        });
+        //To comply with controllerAs syntax
+        main = $controller('MainController');
     }));
 
     it('scope hey should say hello', function() {
-        expect(scope.hey).toBe('hello');
+        expect(main.hey).toBe('hello');
     });
     
 });

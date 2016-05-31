@@ -1,4 +1,4 @@
-import mainFilter from './mainFilter';
+import mainFilter from './main.filter';
 export default ngModule => {
     mainFilter(ngModule);
 };

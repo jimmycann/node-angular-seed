@@ -1,6 +1,6 @@
 describe("mainDirective test", function () {
 
-    beforeEach(window.module("app"));
+    beforeEach(window.module("app.main"));
 
     var scope;
     var mainDirective = '<main-directive></main-directive>';

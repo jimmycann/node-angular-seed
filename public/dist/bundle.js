@@ -52,37 +52,21 @@
 	
 	var _angular2 = _interopRequireDefault(_angular);
 	
-	var _angularUiRouter = __webpack_require__(7);
+	__webpack_require__(7);
 	
-	var _angularUiRouter2 = _interopRequireDefault(_angularUiRouter);
+	__webpack_require__(8);
 	
-	var _angularSanitize = __webpack_require__(8);
-	
-	var _angularSanitize2 = _interopRequireDefault(_angularSanitize);
-	
-	var _directives = __webpack_require__(10);
-	
-	var _directives2 = _interopRequireDefault(_directives);
-	
-	var _config = __webpack_require__(13);
+	var _config = __webpack_require__(10);
 	
 	var _config2 = _interopRequireDefault(_config);
 	
-	var _controllers = __webpack_require__(15);
+	var _filter = __webpack_require__(12);
 	
-	var _controllers2 = _interopRequireDefault(_controllers);
+	var _filter2 = _interopRequireDefault(_filter);
 	
-	var _services = __webpack_require__(17);
+	var _main = __webpack_require__(14);
 	
-	var _services2 = _interopRequireDefault(_services);
-	
-	var _factories = __webpack_require__(19);
-	
-	var _factories2 = _interopRequireDefault(_factories);
-	
-	var _filters = __webpack_require__(21);
-	
-	var _filters2 = _interopRequireDefault(_filters);
+	var _main2 = _interopRequireDefault(_main);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -90,14 +74,15 @@
 	    require('angular-mocks/angular-mocks');
 	}
 	
-	var ngModule = _angular2.default.module('app', [_angularUiRouter2.default, _angularSanitize2.default]);
+	_angular2.default.module('app', ['app.core', 'app.main']);
 	
-	(0, _config2.default)(ngModule);
-	(0, _directives2.default)(ngModule);
-	(0, _controllers2.default)(ngModule);
-	(0, _services2.default)(ngModule);
-	(0, _factories2.default)(ngModule);
-	(0, _filters2.default)(ngModule);
+	_angular2.default.module('app.core', ['ui.router', 'ngSanitize']);
+	
+	_angular2.default.module('app.main', []);
+	
+	(0, _config2.default)();
+	(0, _filter2.default)();
+	(0, _main2.default)();
 
 /***/ },
 /* 1 */
@@ -36465,19 +36450,19 @@
 	    value: true
 	});
 	
-	var _mainDirective = __webpack_require__(11);
+	var _router = __webpack_require__(11);
 	
-	var _mainDirective2 = _interopRequireDefault(_mainDirective);
+	var _router2 = _interopRequireDefault(_router);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	exports.default = function (ngModule) {
-	    (0, _mainDirective2.default)(ngModule);
+	    (0, _router2.default)(ngModule);
 	};
 
 /***/ },
 /* 11 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
 	'use strict';
 	
@@ -36486,31 +36471,39 @@
 	});
 	
 	exports.default = function (ngModule) {
+	    angular.module('app').config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
 	
-	    if (false) {
-	        require('./test/mainDirective.test');
-	    }
+	        $urlRouterProvider.otherwise('/');
 	
-	    ngModule.directive('mainDirective', function ($log) {
-	        return {
-	            restrict: 'E',
-	            scope: {},
-	            template: __webpack_require__(12),
-	            controllerAs: 'vm',
-	            controller: function controller() {
-	                var vm = this;
-	                vm.greeting = 'Hello Webpack';
-	                $log.info('I have some info');
-	            }
-	        };
+	        $stateProvider.state('base', {
+	            url: '/',
+	            templateUrl: 'components/view/main.html',
+	            controller: 'MainController',
+	            controllerAs: 'main'
+	        });
+	        $locationProvider.html5Mode(true);
 	    });
 	};
 
 /***/ },
 /* 12 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
-	module.exports = "<div>\n    {{vm.greeting}}\n</div>"
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _main = __webpack_require__(13);
+	
+	var _main2 = _interopRequireDefault(_main);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	exports.default = function (ngModule) {
+	    (0, _main2.default)(ngModule);
+	};
 
 /***/ },
 /* 13 */
@@ -36522,19 +36515,22 @@
 	    value: true
 	});
 	
-	var _uiRouter = __webpack_require__(14);
-	
-	var _uiRouter2 = _interopRequireDefault(_uiRouter);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
 	exports.default = function (ngModule) {
-	    (0, _uiRouter2.default)(ngModule);
+	
+	    if (false) {
+	        require('./test/main.filter.test');
+	    }
+	
+	    angular.module('app').filter('mainFilter', function () {
+	        return function (input, scope) {
+	            return true;
+	        };
+	    });
 	};
 
 /***/ },
 /* 14 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
@@ -36542,18 +36538,29 @@
 	    value: true
 	});
 	
-	exports.default = function (ngModule) {
-	    ngModule.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
+	var _main = __webpack_require__(15);
 	
-	        $urlRouterProvider.otherwise('/');
+	var _main2 = _interopRequireDefault(_main);
 	
-	        $stateProvider.state('base', {
-	            url: '/',
-	            templateUrl: 'components/view/main.html',
-	            controller: 'mainController'
-	        });
-	        $locationProvider.html5Mode(true);
-	    });
+	var _main3 = __webpack_require__(16);
+	
+	var _main4 = _interopRequireDefault(_main3);
+	
+	var _main5 = __webpack_require__(17);
+	
+	var _main6 = _interopRequireDefault(_main5);
+	
+	var _main7 = __webpack_require__(18);
+	
+	var _main8 = _interopRequireDefault(_main7);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	exports.default = function (mainModule) {
+	    (0, _main2.default)();
+	    (0, _main4.default)();
+	    (0, _main6.default)();
+	    (0, _main8.default)();
 	};
 
 /***/ },
@@ -36566,14 +36573,18 @@
 	    value: true
 	});
 	
-	var _mainController = __webpack_require__(16);
+	exports.default = function (mainModule) {
 	
-	var _mainController2 = _interopRequireDefault(_mainController);
+	    if (false) {
+	        require('./test/main.controller.test');
+	    }
 	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	    angular.module('app.main').controller('MainController', MainController);
 	
-	exports.default = function (ngModule) {
-	    (0, _mainController2.default)(ngModule);
+	    function MainController() {
+	        var vm = this;
+	        vm.hey = 'hello';
+	    }
 	};
 
 /***/ },
@@ -36586,15 +36597,30 @@
 	    value: true
 	});
 	
-	exports.default = function (ngModule) {
+	exports.default = function (mainModule) {
 	
 	    if (false) {
-	        require('./test/mainController.test');
+	        require('./test/main.directive.test');
 	    }
 	
-	    ngModule.controller('mainController', ['$scope', function ($scope) {
-	        $scope.hey = 'hello';
-	    }]);
+	    angular.module('app.main').directive('mainDirective', mainDirective);
+	
+	    mainDirective.$inject = ['$log'];
+	
+	    function mainDirective($log) {
+	        return {
+	            restrict: 'EA',
+	            scope: {},
+	            template: __webpack_require__(19),
+	            controllerAs: 'vm',
+	            bindToController: true,
+	            controller: function controller() {
+	                var vm = this;
+	                vm.greeting = 'Hello Webpack';
+	                $log.info('I have some info');
+	            }
+	        };
+	    }
 	};
 
 /***/ },
@@ -36607,14 +36633,28 @@
 	    value: true
 	});
 	
-	var _mainService = __webpack_require__(18);
+	exports.default = function (mainModule) {
 	
-	var _mainService2 = _interopRequireDefault(_mainService);
+	    if (false) {
+	        require('./test/main.factory.test');
+	    }
 	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	    angular.module('app.main').factory('mainFactory', mainFactory);
 	
-	exports.default = function (ngModule) {
-	    (0, _mainService2.default)(ngModule);
+	    mainFactory.$inject = ['$http'];
+	
+	    function mainFactory($http) {
+	        var get_data = function get_data(data) {
+	            return $http({
+	                method: 'POST',
+	                data: data,
+	                url: 'tba'
+	            });
+	        };
+	        return {
+	            get_data: get_data
+	        };
+	    }
 	};
 
 /***/ },
@@ -36627,13 +36667,15 @@
 	    value: true
 	});
 	
-	exports.default = function (ngModule) {
+	exports.default = function (mainModule) {
 	
 	    if (false) {
-	        require('./test/mainService.test');
+	        require('./test/main.service.test');
 	    }
 	
-	    ngModule.service('mainService', function () {
+	    angular.module('app.main').service('mainService', mainService);
+	
+	    function mainService() {
 	        var data = undefined;
 	
 	        return {
@@ -36647,101 +36689,14 @@
 	                data = value;
 	            }
 	        };
-	    });
+	    }
 	};
 
 /***/ },
 /* 19 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	
-	var _mainFactory = __webpack_require__(20);
-	
-	var _mainFactory2 = _interopRequireDefault(_mainFactory);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	exports.default = function (ngModule) {
-	    (0, _mainFactory2.default)(ngModule);
-	};
-
-/***/ },
-/* 20 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	
-	exports.default = function (ngModule) {
-	
-	    if (false) {
-	        require('./test/mainFactory.test');
-	    }
-	
-	    ngModule.factory('mainFactory', ['$http', function ($http) {
-	        var get_data = function get_data(data) {
-	            return $http({
-	                method: 'POST',
-	                data: data,
-	                url: 'tba'
-	            });
-	        };
-	        return {
-	            get_data: get_data
-	        };
-	    }]);
-	};
-
-/***/ },
-/* 21 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	
-	var _mainFilter = __webpack_require__(22);
-	
-	var _mainFilter2 = _interopRequireDefault(_mainFilter);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	exports.default = function (ngModule) {
-	    (0, _mainFilter2.default)(ngModule);
-	};
-
-/***/ },
-/* 22 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	
-	exports.default = function (ngModule) {
-	
-	    if (false) {
-	        require('./test/mainFilter.test');
-	    }
-	
-	    ngModule.filter('mainFilter', function () {
-	        return function (input, scope) {
-	            return true;
-	        };
-	    });
-	};
+	module.exports = "<div>\n    {{vm.greeting}}\n</div>"
 
 /***/ }
 /******/ ]);

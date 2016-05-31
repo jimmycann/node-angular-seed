@@ -1,10 +1,15 @@
-export default ngModule => {
+'use strict';
 
+export default mainModule => {
+    
     if (ON_TEST) {
-        require('./test/mainService.test');
+        require('./test/main.service.test');
     }
 
-    ngModule.service('mainService', function () {
+    angular.module('app.main')
+        .service('mainService', mainService);
+            
+    function mainService() {
         let data = undefined;
 
         return {
@@ -18,5 +23,5 @@ export default ngModule => {
                 data = value;
             }
         }
-    });
+    }
 };

@@ -1,10 +1,11 @@
 export default ngModule => {
 
     if(ON_TEST) {
-        require('./test/mainFilter.test');
+        require('./test/main.filter.test');
     }
 
-    ngModule.filter('mainFilter', function() {
+    angular.module('app')
+        .filter('mainFilter', function() {
         return function(input, scope) {
             return true;
         };

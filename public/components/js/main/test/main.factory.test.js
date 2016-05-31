@@ -1,6 +1,6 @@
 describe("mainFactory test", function () {
 
-    beforeEach(window.module("app"));
+    beforeEach(window.module("app.main"));
 
     var factory;
     beforeEach(inject(function($injector) {

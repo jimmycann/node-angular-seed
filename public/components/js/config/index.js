@@ -1,4 +1,4 @@
-import uiRouter from './ui-router';
+import uiRouter from './router';
 export default ngModule => {
     uiRouter(ngModule);
 };

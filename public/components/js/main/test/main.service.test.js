@@ -1,6 +1,6 @@
 describe("mainService test", function () {
 
-    beforeEach(window.module("app"));
+    beforeEach(window.module("app.main"));
 
     var service;
     beforeEach(inject(function($injector) {
