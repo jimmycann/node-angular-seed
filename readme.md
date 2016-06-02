@@ -14,6 +14,7 @@ Another MEAN seed app with Webpack
 
 1. Install the latest [Node.js and NPM](https://nodejs.org). This config is built with Node V6.2.0.
 2. Webpack `npm install webpack -g` and ensure it is available on your PATH
+2. Gulp `npm install gulp -g` and ensure it is available on your PATH
 
 ## Setup
 
