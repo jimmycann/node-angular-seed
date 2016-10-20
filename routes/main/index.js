@@ -1,6 +1,8 @@
-module.exports = function (router) {
-    // Set our main route - All traffic set to receive /public/index.html
-    router.get('*', function (req, res) {
-        res.sendFile(__dirname + '/public/index.html');
-    });
+const path = require('path')
+
+module.exports = (router) => {
+  // Set our main route - All traffic set to receive /public/index.html
+  router.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '/public/index.html'))
+  })
 }

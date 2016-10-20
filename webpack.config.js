@@ -4,7 +4,7 @@ var ngAnnotatePlugin = require('ng-annotate-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 var productionConfig = {
-    entry: path.resolve(__dirname, './public/components/js/index.js'),
+    entry: path.resolve(__dirname, './public/index.js'),
     devtool: 'source-map',
     output: {
         path: path.resolve(__dirname, './public/dist'),
@@ -36,7 +36,7 @@ var productionConfig = {
 };
 
 var config = {
-    entry: path.resolve(__dirname, './public/components/js/index.js'),
+    entry: path.resolve(__dirname, './public/index.js'),
     devtool: 'source-map',
     output: {
         path: path.resolve(__dirname, './public/dist'),

@@ -1,6 +1,6 @@
-var mainRoutes = require('./main');
+var mainRoutes = require('./main')
 
-module.exports = function (app, router) {
-    mainRoutes(router);
-    app.use('/',router);
-};
+module.exports = (app, router) => {
+  mainRoutes(router)
+  app.use('/', router)
+}
